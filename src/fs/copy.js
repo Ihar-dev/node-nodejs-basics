@@ -3,8 +3,7 @@ import { fileURLToPath } from 'url';
 import { access } from 'fs/promises';
 import { mkdir } from 'fs/promises';
 import { copyFile } from 'fs/promises';
-import fs from 'fs';
-const fsPromises = fs.promises;
+import { readdir } from 'fs/promises';
 
 export const copy = async () => {
   const __filename = fileURLToPath(import.meta.url);
@@ -18,7 +17,7 @@ export const copy = async () => {
       await mkdir(newDir, {
         recursive: true
       });
-      const files = await fsPromises.readdir(prevDir);
+      const files = await readdir(prevDir);
       for (let file of files) {
         let prevFilePath = path.join(prevDir, file);
         let nextFilePath = path.join(newDir, file);
@@ -41,3 +40,6 @@ export const copy = async () => {
     errMsg();
   } 
 };
+
+
+copy();
