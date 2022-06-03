@@ -13,33 +13,17 @@ export const copy = async () => {
   const newDir = path.join(__dirname, 'files_copy');
   const errMsg = () => console.log(new Error('\x1b[31m FS operation failed'));
 
-  const listDir = async() => {
-    try {
-      return fsPromises.readdir(prevDir);
-    } catch (err) {
-      throw new Error('Error occurred while reading directory!');
-    }
-  }
-
   const copyDirectory = async () => {
     try {
-      const files = await listDir();
+      await mkdir(newDir, {
+        recursive: true
+      });
+      const files = await fsPromises.readdir(prevDir);
       for (let file of files) {
         let prevFilePath = path.join(prevDir, file);
         let nextFilePath = path.join(newDir, file);
         copyFile(prevFilePath, nextFilePath);
       }
-    } catch (err) {
-      if (err) throw err;
-    }
-  };
-
-  const makeDirectory = async () => {
-    try {
-      await mkdir(newDir, {
-        recursive: true
-      });
-      copyDirectory();
     } catch (err) {
       if (err) throw err;
     }
@@ -51,7 +35,7 @@ export const copy = async () => {
       await access(newDir);
       errMsg();
     } catch {
-      makeDirectory();
+      copyDirectory();
     }
   } catch {
     errMsg();
