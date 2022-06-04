@@ -10,7 +10,7 @@ export const parseEnv = () => {
       } else msg += ` ${str}`;
     } 
   });  
-  if (msg) console.log(msg); 
+  if (msg) console.log(msg.slice(0, -1)); 
 };
 
 parseEnv();
