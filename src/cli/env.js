@@ -1,8 +1,14 @@
 export const parseEnv = () => {
   let msg = '';
-  Object.entries(process.env).forEach(([key, value], index) => {
-    if (key.substring(0, 4) === 'RSS_' && index === 0) msg += `${key}=${value};`;
-    else if (key.substring(0, 4) === 'RSS_') msg += ` ${key}=${value};`;
+  let isFirst = true;
+  Object.entries(process.env).forEach(([key, value]) => {
+    if (key.substring(0, 4) === 'RSS_') {
+      const str = `${key}=${value};`;
+      if (isFirst) {
+        msg += str;
+        isFirst = false;
+      } else msg += ` ${str}`;
+    } 
   });  
   if (msg) console.log(msg); 
 };
