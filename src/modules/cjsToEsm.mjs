@@ -8,13 +8,23 @@ const random = Math.random();
 
 let unknownObject;
 
-import * as firstTempObject from './files/a.json' assert {type: "json"};
-import * as secondTempObject from './files/b.json' assert {type: "json"};
+import { readFile } from 'fs/promises';
+
+const firstJsonObject = JSON.parse(
+  await readFile(
+    new URL('./files/a.json', import.meta.url)
+  )
+);
+const secondJsonObject = JSON.parse(
+  await readFile(
+    new URL('./files/b.json', import.meta.url)
+  )
+);
 
 if (random > 0.5) {
-    unknownObject = firstTempObject;
+    unknownObject = firstJsonObject;
 } else {
-    unknownObject = secondTempObject;
+    unknownObject = secondJsonObject;
 }
 
 console.log(`Release ${release()}`);
