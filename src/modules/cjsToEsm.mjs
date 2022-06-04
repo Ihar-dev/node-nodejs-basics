@@ -10,21 +10,18 @@ let unknownObject;
 
 import { readFile } from 'fs/promises';
 
-const firstJsonObject = JSON.parse(
-  await readFile(
-    new URL('./files/a.json', import.meta.url)
-  )
-);
-const secondJsonObject = JSON.parse(
-  await readFile(
-    new URL('./files/b.json', import.meta.url)
-  )
-);
-
 if (random > 0.5) {
-    unknownObject = firstJsonObject;
+  unknownObject = JSON.parse(
+    await readFile(
+      new URL('./files/a.json', import.meta.url)
+    )
+  );
 } else {
-    unknownObject = secondJsonObject;
+  unknownObject = JSON.parse(
+    await readFile(
+      new URL('./files/b.json', import.meta.url)
+    )
+  );
 }
 
 console.log(`Release ${release()}`);
