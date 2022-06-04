@@ -14,3 +14,5 @@ export const create = async () => {
     appendFile(filePath, 'I am fresh and young');
   }
 };
+
+create();

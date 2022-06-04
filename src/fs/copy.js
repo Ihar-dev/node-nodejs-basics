@@ -40,3 +40,5 @@ export const copy = async () => {
     errMsg();
   } 
 };
+
+copy();

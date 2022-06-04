@@ -27,3 +27,5 @@ export const list = async () => {
     console.log(new Error('\x1b[31m FS operation failed'));
   } 
 };
+
+list();
