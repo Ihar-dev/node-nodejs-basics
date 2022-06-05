@@ -1,5 +1,13 @@
+import * as childProcess from 'child_process';
+import { fileURLToPath } from 'url';
+import * as path from 'path';
+
 export const spawnChildProcess = async (args) => {
-  console.log('click');
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+  const filePath = path.join(__dirname, 'files', 'script.js');
+  const child = childProcess.fork(filePath, args);
+  console.log('Enter your text or press "ctrl + c" to quit\n');
 };
 
-spawnChildProcess();
+spawnChildProcess(process.argv);
