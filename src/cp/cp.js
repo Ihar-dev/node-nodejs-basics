@@ -11,7 +11,7 @@ export const spawnChildProcess = async (args) => {
   process.stdout.write('Enter your text or press "ctrl + c" to quit\n');
   process.stdin.pipe(child.stdin);
   child.stdout.pipe(process.stdout);
-  child.stdout.on("data", data => {
+  child.stdout.on('data', data => {
     const msg = `Received from child stdout: ${data}`;
     process.stdout.write(msg);
   });
