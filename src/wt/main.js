@@ -1,3 +1,11 @@
+import * as os from 'os';
+
 export const performCalculations = async () => {
-    // Write your code here
+  const CPUCores = os.cpus();
+  console.log(CPUCores);
+  CPUCores.forEach(core => {
+    console.log(core);
+  });
 };
+
+performCalculations();
